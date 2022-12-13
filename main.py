@@ -7,7 +7,6 @@ import numpy as np
 import os
 
 
-
 def is_Chinese(word):
     for ch in word:
         if ch < '\u4e00':
@@ -38,8 +37,8 @@ class window(QMainWindow, Ui_MainWindow):
         print("Opened database successfully")
         self.c = self.conn.cursor()
         self.c.execute('select * from BI_HUA_BEAN')
-        self.list = self.c.fetchall()
-        self.list = np.array(list)
+        self.Lis = self.c.fetchall()
+        self.Lis = np.array(self.Lis)
 
     def ClickBtn(self):
         inputText = self.lineEdit.text()
@@ -50,9 +49,9 @@ class window(QMainWindow, Ui_MainWindow):
             for i in inputText:
                 num = ord(i)  # 使用汉字的unicode来匹配
                 print(num)
-                equal_to_num = (self.list[:, 3] == '%d' % num)
-                stroke += int(self.list[equal_to_num, 2])
-                print(self.list[equal_to_num, :])
+                equal_to_num = (self.Lis[:, 3] == '%d' % num)
+                stroke += int(self.Lis[equal_to_num, 2])
+                print(self.Lis[equal_to_num, :])
         else:
             stroke = -1
 
@@ -70,3 +69,6 @@ if __name__ == '__main__':
     window = window()
     window.show()
     sys.exit(app.exec())
+
+
+
