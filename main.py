@@ -43,8 +43,8 @@ class window(QMainWindow, Ui_MainWindow):
     def ClickBtn(self):
         inputText = self.lineEdit.text()
         stroke = 0
-        if inputText is None:
-            QMessageBox.information(self, '提示：', '请输入您的姓名')
+        if len(inputText) == 0:
+            stroke = -3
         elif is_Chinese(inputText):
             for i in inputText:
                 num = ord(i)  # 使用汉字的unicode来匹配
@@ -60,6 +60,8 @@ class window(QMainWindow, Ui_MainWindow):
         else:
             if stroke == -1:
                 QMessageBox.information(self, '结果：', '阳性！这里是中国！！！\nPositive! This is China!!!')
+            elif stroke == -3:
+                QMessageBox.information(self, '提示：', '请输入您的姓名')
             else:
                 QMessageBox.information(self, '结果：', '阴性！')
 
